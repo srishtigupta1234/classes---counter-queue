@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    class Queue{
+        constructor(){
+            this.length = 0;
+            this.queue = [];
+        }
+        enqueue(el){
+            this.queue.push(el);
+            this.length++;
+        }
+        dequeue(){
+          if (this.isEmpty()) {
+             throw new Error("Queue is empty");
+           }
+          return this.queue.shift();
+          this.length--;
+
+        }
+        threenqueue(...el){
+            this.queue.push(...el);
+            this.length = this.length+3;
+        }
+        threedequeue(){
+          if (this.isEmpty()) {
+             throw new Error("Queue is empty");
+           }
+           for(let i = 0; i<3; i++){
+            if (!this.isEmpty()) {
+              this.queue.shift();
+              this.length--;
+             }
+           }
+         
+        }
+        front() {
+           if (this.isEmpty()) {
+               throw new Error("Queue is empty");
+            }
+            return this.queue[0];
+        }
+        isEmpty() {
+           return this.length === 0;
+        }
+
+    }
+  const queue = new Queue();
+   queue.enqueue(10);
+   queue.enqueue(20);
+   queue.enqueue(30);
+   queue.threenqueue(30,40,50);
+//    console.log(queue)
+   console.log("Front element:", queue.front());
+   console.log("Delete element:", queue.threedequeue())
+   console.log(queue)
+</script>

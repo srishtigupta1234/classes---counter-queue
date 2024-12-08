@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Counter</h1>
+     <div>
+           <h1 id="counter-display">0</h1>
+             <button id="toggle-button">Start/Stop</button>
+            <button id="increment-button">Increment</button>
+            <button id="decrement-button">Decrement</button>
+        </div> 
+</body>
+</html>
+<script>
+   class Counter{
+      constructor(){
+        this.count = 0;
+        this.intervalId= null
+      }
+      startCounter(){
+        if(!this.intervalId){
+            this.intervalId = setInterval(() => {
+            this.count++;
+            this.updateDisplay();
+         }, 1000);
+        }
+         
+   }
+   stopCounter(){
+       if (this.intervalId) {
+           clearInterval(this.intervalId)
+       }
+        this.intervalId = null;
+   }
+   toggleCounter(){
+      if(this.intervalId){
+        this.stopCounter();
+      }
+      else{
+         this.startCounter();
+      }
+   }
+   increment(){
+    this.stopCounter();
+    this.count++;
+    this.updateDisplay();
+   }
+   decrement(){
+    this.stopCounter();
+    this.count--;
+    this.updateDisplay();
+   }
+   updateDisplay(){
+      document.getElementById("counter-display").innerText = this.count;
+   }
+}
+let counter = new Counter();
+document.addEventListener("DOMContentLoaded",()=>{
+    document.getElementById("toggle-button").addEventListener("click", () => {
+    counter.toggleCounter();
+  });
+
+  document.getElementById("increment-button").addEventListener("click", () => {
+    counter.increment();
+  });
+
+  document.getElementById("decrement-button").addEventListener("click", () => {
+    counter.decrement();
+  });
+counter.updateDisplay();
+})
+
+</script>
